@@ -1,4 +1,4 @@
-package com.aamir.ashraf.kukufmassignment.ui.theme
+package com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

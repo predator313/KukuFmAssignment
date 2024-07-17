@@ -1,4 +1,4 @@
-package com.aamir.ashraf.kukufmassignment.ui.theme
+package com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
