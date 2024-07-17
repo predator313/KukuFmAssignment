@@ -7,8 +7,12 @@ data class RocketDetailsDto(
     val missionName:String,
     @SerializedName("launch_year")
     val launchYear:String,
+    @SerializedName("launch_date_local")
+    val launchDate:String,
     @SerializedName("rocket")
-    val rocket: Rocket
+    val rocket: Rocket,
+//    @SerializedName("launch_site")
+//    val launchSite: LaunchSite
 
 )
 data class Rocket(
@@ -31,6 +35,9 @@ data class PayLoad(
     val payLoadMassInKg:Double,
     val orbit:String,
     val nationality:String,
-    val manufacturer:String
 
+)
+data class LaunchSite(
+    @SerializedName("site_name_long")
+    val siteName:String
 )

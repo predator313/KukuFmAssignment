@@ -11,8 +11,6 @@ data class RocketDetailsEntity(
     val rocketName:String,
     val launchDate:String,
     val rocketType:String,
-    val detailMessage:String,
-    val payLoadId:String,
     val payLoadType:String,
     val payLoadMassInKg:Int,
     val nationality:String,

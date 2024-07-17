@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 @Database(
     entities = [RocketDetailsEntity::class],
-    version = 1
+    version = 3
 )
 abstract class RocketDetailDb:RoomDatabase() {
     abstract val dao:RocketDetailDao
