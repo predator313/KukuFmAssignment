@@ -1,5 +1,9 @@
 package com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.components.screen
 
+import android.util.Log
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,15 +18,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.aamir.ashraf.kukufmassignment.feature_rocket_data.domain.model.RocketMainScreenModel
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.RocketViewModel
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.components.RocketList
 import com.aamir.ashraf.kukufmassignment.utils.Resource
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun MainScreen(
-    rocketViewModel: RocketViewModel
+    onItemClick:(RocketMainScreenModel)->Unit,
 ){
+    val rocketViewModel: RocketViewModel = hiltViewModel()
     val getRocketDetailsState by rocketViewModel.getRocketState.collectAsState()
 
     val rocketMainScreenList by rocketViewModel.rocketMainScreenModelList.collectAsState()
@@ -48,7 +56,14 @@ fun MainScreen(
                         Text(text = "Loading...")
                     }
                     is Resource.Success<*> -> {
-                        RocketList(rocketMainScreenList)
+                        RocketList(rocketMainScreenList, onRocketClicked = {
+                            onItemClick(it)
+                            Log.e("clicked","flight Number ${it.flightNumber}")
+
+
+
+
+                        })
                     }
                     is Resource.Error<*> -> {
                         val errorMessage = (getRocketDetailsState as Resource.Error).message

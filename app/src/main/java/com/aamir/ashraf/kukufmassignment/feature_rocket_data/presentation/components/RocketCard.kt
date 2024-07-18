@@ -1,5 +1,6 @@
 package com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,11 +15,13 @@ import com.aamir.ashraf.kukufmassignment.feature_rocket_data.domain.model.Rocket
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.domain.model.RocketMainScreenModel
 
 @Composable
-fun RocketCard(rocketMainScreenModel: RocketMainScreenModel){
+fun RocketCard(rocketMainScreenModel: RocketMainScreenModel,onRocketClicked:(RocketMainScreenModel)->Unit){
     Card(
         modifier = Modifier
             .padding(8.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable { onRocketClicked(rocketMainScreenModel) }
+        ,
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {

@@ -36,4 +36,9 @@ class RocketDetailRepositoryImpl(
         }
 
     }
+
+    override suspend fun getRocketDetailByFlightNumber(flightNumber: Int): Resource<RocketDetailsDto> {
+        val response = dao.getRocketDetailByFlightNumber(flightNumber)
+        return Resource.Success(response.toDto())
+    }
 }

@@ -5,4 +5,6 @@ import com.aamir.ashraf.kukufmassignment.utils.Resource
 
 interface RocketDetailRepository {
     suspend fun getRocketDetails():Resource<List<RocketDetailsDto>>
+
+    suspend fun getRocketDetailByFlightNumber(flightNumber:Int):Resource<RocketDetailsDto>
 }

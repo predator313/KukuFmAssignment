@@ -31,9 +31,6 @@ class RocketViewModel @Inject constructor(
     private val _rocketMainScreenModelList = MutableStateFlow<List<RocketMainScreenModel>>(emptyList())
     val rocketMainScreenModelList: StateFlow<List<RocketMainScreenModel>> = _rocketMainScreenModelList
 
-    //detail screen data
-    private val _rocketDetailScreenModelList = MutableStateFlow<List<RocketDetailScreenModel>>(emptyList())
-    val rocketDetailScreenModelList: StateFlow<List<RocketDetailScreenModel>> = _rocketDetailScreenModelList
 
 
     fun getRocketDetails(){
@@ -51,11 +48,24 @@ class RocketViewModel @Inject constructor(
                     it.toRocketMainScreen()
                 }?: emptyList()
 
-                //detail screen
-                _rocketDetailScreenModelList.value = result.data?.map {
-                    it.toRocketDetailModel() }?: emptyList()
-                }
+
             }
         }
     }
+
+    private val _getRocketDetailStateByFn = MutableStateFlow<Resource<RocketDetailsDto>>(Resource.Loading())
+    val getRocketDetailStateByFn:StateFlow<Resource<RocketDetailsDto>> = _getRocketDetailStateByFn
+
+
+    fun getRockDetailByFlightNumber(flightNumber:Int){
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO){
+                getRocketDetailUseCase.getRocketDetailByFlightNumber(flightNumber)
+            }
+            _getRocketDetailStateByFn.value = result
+        }
+    }
+
+}
+
 

@@ -8,6 +8,7 @@ import com.aamir.ashraf.kukufmassignment.feature_rocket_data.data.remote.ApiInte
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.data.remote.RetrofitInstance
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.data.repository.RocketDetailRepositoryImpl
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.domain.repository.RocketDetailRepository
+import com.aamir.ashraf.kukufmassignment.feature_rocket_data.domain.use_case.GetRocketDetailByFlightNumber
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.domain.use_case.GetRocketDetailUseCase
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.domain.use_case.GetRocketDetails
 import com.aamir.ashraf.kukufmassignment.utils.ROCKET_DB_NAME
@@ -52,6 +53,8 @@ object KuKuModule {
     @Singleton
     @Provides
     fun provideRocketDetailUseCase(rocketDetailRepository: RocketDetailRepository):GetRocketDetailUseCase{
-        return GetRocketDetailUseCase(getRocketDetails = GetRocketDetails(rocketDetailRepository))
+        return GetRocketDetailUseCase(getRocketDetails = GetRocketDetails(rocketDetailRepository),
+            getRocketDetailByFlightNumber = GetRocketDetailByFlightNumber(rocketDetailRepository)
+            )
     }
 }

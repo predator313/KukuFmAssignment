@@ -13,6 +13,7 @@ fun RocketDetailsEntity.toDto(): RocketDetailsDto {
         missionName = missionName,
         launchYear = launchYear,
         launchDate = launchDate,
+        flightNumber = flightNumber,
 //        launchSite = LaunchSite(launchSiteName),
         rocket = Rocket(
             rocketName = rocketName,
@@ -34,7 +35,8 @@ fun RocketDetailsDto.toRocketMainScreen():RocketMainScreenModel{
     return RocketMainScreenModel(
         rocketName = rocket.rocketName,
         missionName = missionName,
-        launchYear = launchYear
+        launchYear = launchYear,
+        flightNumber = flightNumber
     )
 }
 
@@ -51,6 +53,7 @@ fun RocketDetailsDto.toEntity(): RocketDetailsEntity {
         payLoadMassInKg = payLoad.payLoadMassInKg.toInt(),
         nationality = payLoad.nationality,
         orbit = payLoad.orbit,
+        flightNumber = flightNumber
 //        launchSite = launchSite.siteName
     )
 
@@ -70,6 +73,7 @@ fun RocketDetailsDto.toRocketDetailModel():RocketDetailScreenModel{
         payLoadMassInKg = payLoad.payLoadMassInKg.toInt(),
         nationality = payLoad.nationality,
         orbit = payLoad.orbit,
+        flightNumber = flightNumber
     )
 
 

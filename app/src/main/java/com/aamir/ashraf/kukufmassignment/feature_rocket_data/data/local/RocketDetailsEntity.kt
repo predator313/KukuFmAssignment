@@ -15,6 +15,7 @@ data class RocketDetailsEntity(
     val payLoadMassInKg:Int,
     val nationality:String,
     val orbit:String,
+    val flightNumber:Int,
     @PrimaryKey(autoGenerate = true)
     val id:Long=0L
 )

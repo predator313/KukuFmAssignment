@@ -11,6 +11,8 @@ data class RocketDetailsDto(
     val launchDate:String,
     @SerializedName("rocket")
     val rocket: Rocket,
+    @SerializedName("flight_number")
+    val flightNumber:Int
 //    @SerializedName("launch_site")
 //    val launchSite: LaunchSite
 

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("org.jetbrains.kotlin.plugin.serialization")
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
 
@@ -73,6 +74,7 @@ dependencies {
     // Compose dependencies
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.1")
     implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.navigation:navigation-fragment-compose:2.8.0-beta05")
     implementation("com.google.accompanist:accompanist-flowlayout:0.17.0")
     implementation ("androidx.compose.material:material-icons-extended")
 
@@ -103,5 +105,9 @@ dependencies {
     // Kotlin Extensions and Coroutines support for Room
     implementation ("androidx.room:room-ktx:2.6.1")
     implementation ("com.google.code.gson:gson:2.8.7")
+
+    //serialization
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+
 
 }
