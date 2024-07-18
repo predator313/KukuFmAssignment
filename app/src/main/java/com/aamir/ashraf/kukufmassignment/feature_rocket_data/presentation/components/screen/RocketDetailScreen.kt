@@ -4,35 +4,26 @@ import android.util.Log
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.data.mapper.toRocketDetailModel
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.RocketViewModel
 import com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.components.RocketDetail
-import com.aamir.ashraf.kukufmassignment.feature_rocket_data.presentation.components.RocketList
 import com.aamir.ashraf.kukufmassignment.utils.Resource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun RocketDetailScreen(
     flightNumber: Int,
-
     onNavigate: () -> Unit
 ) {
     val rocketViewModel: RocketViewModel = hiltViewModel()
@@ -41,40 +32,42 @@ fun RocketDetailScreen(
     LaunchedEffect(flightNumber) {
         rocketViewModel.getRockDetailByFlightNumber(flightNumber)
     }
+
     val getRocketDetailState by rocketViewModel.getRocketDetailStateByFn.collectAsState()
-    Column(
+
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
+        contentAlignment = Alignment.TopCenter
     ) {
-        Text(text = "Live From Detail Screen $flightNumber")
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(
+                text = "Details Of FlightNumber $flightNumber",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(16.dp))
 
-        when (getRocketDetailState) {
-            is Resource.Loading -> {
-                Text(text = "Loading...")
-            }
-            is Resource.Success -> {
-                val rocketDetail = (getRocketDetailState as Resource.Success).data
-                rocketDetail?.let {
-                    RocketDetail(it.toRocketDetailModel())
+            when (getRocketDetailState) {
+                is Resource.Loading -> {
+                    Text(text = "Loading...")
                 }
-            }
-            is Resource.Error -> {
-                val errorMessage = (getRocketDetailState as Resource.Error).message
-                Text(text = "Error: $errorMessage")
+                is Resource.Success -> {
+                    val rocketDetail = (getRocketDetailState as Resource.Success).data
+                    rocketDetail?.let {
+                        RocketDetail(it.toRocketDetailModel())
+                    }
+                }
+                is Resource.Error -> {
+                    val errorMessage = (getRocketDetailState as Resource.Error).message
+                    Text(text = "Error: $errorMessage")
+                }
             }
         }
     }
-
-
 }
- 
-
-
-
-
-
-
-
